@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticasTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    banderaEspaña(Modifier.padding(innerPadding))
+                    banderaArgentina(Modifier.padding(innerPadding))
                 }
             }
         }
@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun banderaEspaña(modifier: Modifier = Modifier) {
+fun banderaArgentina(modifier: Modifier = Modifier) {
 
     Box {
         Column(modifier.fillMaxSize()) {
