@@ -31,7 +31,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticasTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    BanderaMexico(modifier = Modifier.padding(innerPadding))
+                    BanderaFrancia(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -39,14 +39,10 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun BanderaMexico(modifier: Modifier = Modifier) {
+fun BanderaFrancia(modifier: Modifier = Modifier) {
     Row(modifier = modifier.fillMaxSize()){
-        Column(modifier = Modifier.fillMaxHeight().weight(2f).background(Color.Green)) { }
-        Column(modifier = Modifier.fillMaxHeight().weight(2f).background(Color.White)) {
-            Box(modifier = Modifier.fillMaxSize(), Alignment.Center) {
-                Image(painter = painterResource(R.drawable.mexico_coat_of_arms), null)
-            }
-        }
+        Column(modifier = Modifier.fillMaxHeight().weight(2f).background(Color.Blue)) { }
+        Column(modifier = Modifier.fillMaxHeight().weight(2f).background(Color.White)) { }
         Column(modifier = Modifier.fillMaxHeight().weight(2f).background(Color.Red)) { }
     }
 }
