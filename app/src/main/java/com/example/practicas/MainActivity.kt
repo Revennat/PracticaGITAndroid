@@ -45,7 +45,6 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun banderaArgentina(modifier: Modifier = Modifier) {
-
     Box {
         Column(modifier.fillMaxSize()) {
             Row(Modifier
