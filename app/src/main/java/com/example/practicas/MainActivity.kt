@@ -1,15 +1,26 @@
 package com.example.practicas
 
+import android.media.Image
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.practicas.ui.theme.PracticasTheme
 
@@ -20,10 +31,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticasTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    BanderaMexico(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -31,13 +39,18 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun BanderaMexico(modifier: Modifier = Modifier) {
+    Row(modifier = modifier.fillMaxSize()){
+        Column(modifier = Modifier.fillMaxHeight().weight(2f).background(Color.Green)) { }
+        Column(modifier = Modifier.fillMaxHeight().weight(2f).background(Color.White)) {
+            Box(modifier = Modifier.fillMaxSize(), Alignment.Center) {
+                Image(painter = painterResource(R.drawable.mexico_coat_of_arms), null)
+            }
+        }
+        Column(modifier = Modifier.fillMaxHeight().weight(2f).background(Color.Red)) { }
+    }
 }
-
+ /*
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
@@ -45,3 +58,5 @@ fun GreetingPreview() {
         Greeting("Android")
     }
 }
+
+  */
