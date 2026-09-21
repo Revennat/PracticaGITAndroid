@@ -26,7 +26,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticasTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    banderaEspaña(Modifier.padding(innerPadding))
+                    banderaColombia(Modifier.padding(innerPadding))
                 }
             }
         }
@@ -34,11 +34,11 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun banderaEspaña(modifier: Modifier = Modifier) {
+fun banderaColombia(modifier: Modifier = Modifier) {
     Column(modifier.fillMaxSize()) {
-        Row(Modifier.fillMaxWidth().weight(2f).background(Color.Red)) { }
         Row(Modifier.fillMaxWidth().weight(2f).background(Color.Yellow)) { }
-        Row(Modifier.fillMaxWidth().weight(2f).background(Color.Red)) { }
+        Row(Modifier.fillMaxWidth().weight(0.5f).background(Color.Blue)) { }
+        Row(Modifier.fillMaxWidth().weight(0.5f).background(Color.Red)) { }
     }
 }
 /*
