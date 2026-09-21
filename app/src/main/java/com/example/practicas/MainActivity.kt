@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -34,10 +35,10 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun BanderaAlemania(modifier: Modifier = Modifier) {
-    Row(modifier.fillMaxSize()) {
-        Column(Modifier.fillMaxHeight().weight(2f).background(Color.Black)) { }
-        Column(Modifier.fillMaxHeight().weight(2f).background(Color.Red)) { }
-        Column(Modifier.fillMaxHeight().weight(2f).background(Color.Yellow)) { }
+    Column(modifier.fillMaxSize()) {
+        Row(Modifier.fillMaxWidth().weight(2f).background(Color.Black)) { }
+        Row(Modifier.fillMaxWidth().weight(2f).background(Color.Yellow)) { }
+        Row(Modifier.fillMaxWidth().weight(2f).background(Color.Red)) { }
     }
 }
 /*
