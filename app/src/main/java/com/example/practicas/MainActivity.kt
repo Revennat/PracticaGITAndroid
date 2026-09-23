@@ -13,15 +13,20 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.practicas.ui.theme.PracticasTheme
 
 class MainActivity : ComponentActivity() {
@@ -31,25 +36,41 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticasTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    BanderaMexico(modifier = Modifier.padding(innerPadding))
+                    BanderaBrasil(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
     }
 }
 
+val RombosShape = GenericShape { size, _ ->
+    moveTo(size.width / 2f, 0f)
+    lineTo(size.width, size.height / 2f)
+    lineTo(size.width / 2f, size.height)
+    lineTo(0f, size.height / 2f)
+    close()
+}
+
 @Composable
-fun BanderaMexico(modifier: Modifier = Modifier) {
-    Row(modifier = modifier.fillMaxSize()){
-        Column(modifier = Modifier.fillMaxHeight().weight(2f).background(Color.Green)) { }
-        Column(modifier = Modifier.fillMaxHeight().weight(2f).background(Color.White)) {
-            Box(modifier = Modifier.fillMaxSize(), Alignment.Center) {
-                Image(painter = painterResource(R.drawable.mexico_coat_of_arms), null)
-            }
-        }
-        Column(modifier = Modifier.fillMaxHeight().weight(2f).background(Color.Red)) { }
+fun BanderaBrasil(modifier: Modifier = Modifier) {
+    Box(
+        modifier = Modifier.fillMaxSize().background(Color(0xFF009B3A)),
+        contentAlignment = Alignment.Center
+    ){
+        Box(
+            modifier = Modifier
+                .fillMaxSize(0.75f)
+                .clip(RombosShape)
+                .background(Color(0xFFFEDF00))
+        )
+        Box(
+            modifier = Modifier.size(150.dp).clip(CircleShape).background(Color(0xFF002776))
+        )
     }
 }
+
+
+
  /*
 @Preview(showBackground = true)
 @Composable
