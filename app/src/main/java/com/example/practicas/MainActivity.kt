@@ -54,17 +54,11 @@ val RombosShape = GenericShape { size, _ ->
 @Composable
 fun BanderaBrasil(modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier.fillMaxSize().background(Color(0xFF009B3A)),
+        modifier = Modifier.fillMaxSize().background(Color.White),
         contentAlignment = Alignment.Center
     ){
         Box(
-            modifier = Modifier
-                .fillMaxSize(0.75f)
-                .clip(RombosShape)
-                .background(Color(0xFFFEDF00))
-        )
-        Box(
-            modifier = Modifier.size(150.dp).clip(CircleShape).background(Color(0xFF002776))
+            modifier = Modifier.size(200.dp).clip(CircleShape).background(Color.Red)
         )
     }
 }
