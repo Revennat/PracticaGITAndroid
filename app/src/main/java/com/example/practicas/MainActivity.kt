@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -23,6 +24,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,7 +38,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticasTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    BanderaBrasil(modifier = Modifier.padding(innerPadding))
+                    BanderaUSA(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -51,15 +53,30 @@ val RombosShape = GenericShape { size, _ ->
     close()
 }
 
+
 @Composable
-fun BanderaBrasil(modifier: Modifier = Modifier) {
+fun BanderaUSA(modifier: Modifier = Modifier) {
     Box(
-        modifier = Modifier.fillMaxSize().background(Color.White),
-        contentAlignment = Alignment.Center
+        modifier = Modifier.fillMaxSize()
     ){
+        Column(Modifier.fillMaxSize()) {
+            repeat(13){ index ->
+                Box(
+                    Modifier.weight(1f).fillMaxWidth().background(if (index % 2 == 0) Color(0xFFB22234) else Color.White)
+                )
+            }
+        }
         Box(
-            modifier = Modifier.size(200.dp).clip(CircleShape).background(Color.Red)
-        )
+            modifier = Modifier.fillMaxWidth(0.54f).fillMaxHeight(0.54f).background(Color(0xFF3C3B6E))
+        ){
+            Row(Modifier.fillMaxSize()) {
+                repeat(5){index ->
+                    Box(
+                        Modifier.clip(RombosShape).size(10.dp).background(Color.White)
+                    )
+                }
+            }
+        }
     }
 }
 
