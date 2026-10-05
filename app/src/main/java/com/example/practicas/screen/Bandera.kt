@@ -18,6 +18,8 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.example.practicas.R
+import com.example.practicas.ui.theme.RojoMexico
+import com.example.practicas.ui.theme.VerdeMexico
 
 @Preview
 @Composable
@@ -26,7 +28,7 @@ fun BanderaScreen(modifier: Modifier = Modifier){
         val (caja, caja1, caja2, caja3) = createRefs();
         val LnGd = createGuidelineFromTop(0.4f)
 
-        Box(modifier.background(Color.Green).constrainAs(caja) {
+        Box(modifier.background(VerdeMexico).constrainAs(caja) {
             linkTo(parent.start, caja1.start)
             linkTo(parent.top, parent.bottom)
             width = Dimension.fillToConstraints
@@ -38,7 +40,7 @@ fun BanderaScreen(modifier: Modifier = Modifier){
             width = Dimension.fillToConstraints
             height = Dimension.fillToConstraints
         })
-        Box(modifier.background(Color.Red).constrainAs(caja2) {
+        Box(modifier.background(RojoMexico).constrainAs(caja2) {
             linkTo(caja1.end, parent.end)
             linkTo(parent.top, parent.bottom)
             width = Dimension.fillToConstraints
