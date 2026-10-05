@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             PracticasTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    BanderaUSA(modifier = Modifier.padding(innerPadding))
+
                 }
             }
         }
@@ -54,31 +54,6 @@ val RombosShape = GenericShape { size, _ ->
 }
 
 
-@Composable
-fun BanderaUSA(modifier: Modifier = Modifier) {
-    Box(
-        modifier = Modifier.fillMaxSize()
-    ){
-        Column(Modifier.fillMaxSize()) {
-            repeat(13){ index ->
-                Box(
-                    Modifier.weight(1f).fillMaxWidth().background(if (index % 2 == 0) Color(0xFFB22234) else Color.White)
-                )
-            }
-        }
-        Box(
-            modifier = Modifier.fillMaxWidth(0.54f).fillMaxHeight(0.54f).background(Color(0xFF3C3B6E))
-        ){
-            Row(Modifier.fillMaxSize()) {
-                repeat(5){index ->
-                    Box(
-                        Modifier.clip(RombosShape).size(10.dp).background(Color.White)
-                    )
-                }
-            }
-        }
-    }
-}
 
 
 

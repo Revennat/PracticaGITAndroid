@@ -7,22 +7,47 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.constraintlayout.compose.Dimension
 import com.example.practicas.R
-import java.lang.reflect.Modifier
 
+@Preview
 @Composable
-fun BanderaScreen(modifier: Modifier, fillMaxSize: Modifier.() -> androidx.compose.ui.Modifier){
-    Row(modifier = modifier.fillMaxSize()){
-        Column(modifier = androidx.compose.ui.Modifier.fillMaxHeight().weight(2f).background(Color.Green)) { }
-        Column(modifier = androidx.compose.ui.Modifier.fillMaxHeight().weight(2f).background(Color.White)) {
-            Box(modifier = androidx.compose.ui.Modifier.fillMaxSize(), Alignment.Center) {
-                Image(painter = painterResource(R.drawable.mexico_coat_of_arms), null)
-            }
-        }
-        Column(modifier = androidx.compose.ui.Modifier.fillMaxHeight().weight(2f).background(Color.Red)) { }
+fun BanderaScreen(modifier: Modifier = Modifier){
+    ConstraintLayout(modifier = modifier.fillMaxSize()) {
+        val (caja, caja1, caja2, caja3) = createRefs();
+        val LnGd = createGuidelineFromTop(0.4f)
+
+        Box(modifier.background(Color.Green).constrainAs(caja) {
+            linkTo(parent.start, caja1.start)
+            linkTo(parent.top, parent.bottom)
+            width = Dimension.fillToConstraints
+            height = Dimension.fillToConstraints
+        })
+        Box(modifier.background(Color.White).constrainAs(caja1) {
+            linkTo(caja.end, caja2.start)
+            linkTo(parent.top, parent.bottom)
+            width = Dimension.fillToConstraints
+            height = Dimension.fillToConstraints
+        })
+        Box(modifier.background(Color.Red).constrainAs(caja2) {
+            linkTo(caja1.end, parent.end)
+            linkTo(parent.top, parent.bottom)
+            width = Dimension.fillToConstraints
+            height = Dimension.fillToConstraints
+        })
+        Image(painter = painterResource(id = R.drawable.mexico_coat_of_arms), contentDescription =  null, modifier = Modifier.size(110.dp).constrainAs(caja3){
+            top.linkTo(LnGd)
+            start.linkTo(caja1.start)
+            end.linkTo(caja2.start)
+        })
     }
 }
