@@ -8,9 +8,11 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -30,23 +32,27 @@ fun BanderaScreen(modifier: Modifier = Modifier){
         val (caja, caja1, caja2, caja3) = createRefs();
         val LnGd = createGuidelineFromStart(0.05f)
 
-        Box(modifier.background(Color.Yellow).constrainAs(caja) {
+        Box(modifier.background(Color(0xFF74ACDF)).constrainAs(caja) {
             linkTo(parent.start, parent.end)
             linkTo(parent.top, caja1.top)
             width = Dimension.fillToConstraints
-            height = Dimension.percent(0.55f)
+            height = Dimension.fillToConstraints
         })
-        Box(modifier.background(Color.Blue).constrainAs(caja1) {
+        Box(modifier.background(Color.White).constrainAs(caja1) {
             linkTo(parent.start, parent.end )
             linkTo(caja.bottom, caja2.top)
             width = Dimension.fillToConstraints
             height = Dimension.fillToConstraints
         })
-        Box(modifier.background(Color.Red).constrainAs(caja2) {
+        Box(modifier.background(Color(0xFF74ACDF)).constrainAs(caja2) {
             linkTo(parent.start, parent.end)
             linkTo(caja1.bottom, parent.bottom )
             width = Dimension.fillToConstraints
             height = Dimension.fillToConstraints
+        })
+        Box(modifier.clip(CircleShape).background(Color(0xFFF6B40E)).size(100.dp).constrainAs(caja3){
+            linkTo(parent.start, parent.end)
+            linkTo(caja.bottom, caja2.top)
         })
 
     }
