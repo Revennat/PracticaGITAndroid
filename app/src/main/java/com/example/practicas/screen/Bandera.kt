@@ -28,25 +28,30 @@ import com.example.practicas.ui.theme.VerdeMexico
 fun BanderaScreen(modifier: Modifier = Modifier){
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
         val (caja, caja1, caja2, caja3) = createRefs();
-        val LnGd = createGuidelineFromTop(0.4f)
+        val LnGd = createGuidelineFromStart(0.05f)
 
-        Box(modifier.background(Color.Black).constrainAs(caja) {
+        Box(modifier.background(Color(0xFFAA151B)).constrainAs(caja) {
             linkTo(parent.start, parent.end)
             linkTo(parent.top, caja1.top)
             width = Dimension.fillToConstraints
             height = Dimension.fillToConstraints
         })
-        Box(modifier.background(Color(0xFFDD0000)).constrainAs(caja1) {
+        Box(modifier.background(Color(0xFFF1BF00)).constrainAs(caja1) {
             linkTo(parent.start, parent.end )
             linkTo(caja.bottom, caja2.top)
             width = Dimension.fillToConstraints
-            height = Dimension.fillToConstraints
+            height = Dimension.percent(0.55f)
         })
-        Box(modifier.background(Color(0xFFFFCE00)).constrainAs(caja2) {
+        Box(modifier.background(Color(0xFFAA151B)).constrainAs(caja2) {
             linkTo(parent.start, parent.end)
             linkTo(caja1.bottom, parent.bottom )
             width = Dimension.fillToConstraints
             height = Dimension.fillToConstraints
         })
+        Image(painterResource(R.drawable.escudo_de_espa_a__mazonado_), null ,
+            modifier.size(200.dp).constrainAs(caja3){
+                start.linkTo(LnGd)
+                linkTo(caja.bottom, caja2.top)
+            })
     }
 }
