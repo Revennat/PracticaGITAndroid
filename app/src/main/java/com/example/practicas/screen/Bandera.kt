@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.GenericShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -25,35 +26,36 @@ import com.example.practicas.ui.theme.RojoFrancia
 import com.example.practicas.ui.theme.RojoMexico
 import com.example.practicas.ui.theme.VerdeMexico
 
+val RombosShape = GenericShape { size, _ ->
+    moveTo(size.width / 2f, 0f)
+    lineTo(size.width, size.height / 2f)
+    lineTo(size.width / 2f, size.height)
+    lineTo(0f, size.height / 2f)
+    close()
+}
+
 @Preview
 @Composable
 fun BanderaScreen(modifier: Modifier = Modifier){
     ConstraintLayout(modifier = modifier.fillMaxSize()) {
         val (caja, caja1, caja2, caja3) = createRefs();
-        val LnGd = createGuidelineFromStart(0.05f)
+        val LnGd = createGuidelineFromStart(0.5f)
 
-        Box(modifier.background(Color(0xFF74ACDF)).constrainAs(caja) {
+        Box(modifier.background(Color(0xFF009B3A)).constrainAs(caja) {
             linkTo(parent.start, parent.end)
-            linkTo(parent.top, caja1.top)
+            linkTo(parent.top, parent.bottom)
             width = Dimension.fillToConstraints
             height = Dimension.fillToConstraints
         })
-        Box(modifier.background(Color.White).constrainAs(caja1) {
-            linkTo(parent.start, parent.end )
-            linkTo(caja.bottom, caja2.top)
-            width = Dimension.fillToConstraints
-            height = Dimension.fillToConstraints
-        })
-        Box(modifier.background(Color(0xFF74ACDF)).constrainAs(caja2) {
+        Box(modifier.clip(RombosShape).background(Color(0xFFFEDF00)).size(300.dp).constrainAs(caja1) {
             linkTo(parent.start, parent.end)
-            linkTo(caja1.bottom, parent.bottom )
-            width = Dimension.fillToConstraints
-            height = Dimension.fillToConstraints
+            linkTo(parent.top, parent.bottom)
         })
-        Box(modifier.clip(CircleShape).background(Color(0xFFF6B40E)).size(100.dp).constrainAs(caja3){
+        Box(modifier.clip(CircleShape).background(Color(0xFF002776)).size(180.dp).constrainAs(caja2) {
             linkTo(parent.start, parent.end)
-            linkTo(caja.bottom, caja2.top)
+            linkTo(parent.top, parent.bottom)
         })
+
 
     }
 }
