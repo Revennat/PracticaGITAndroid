@@ -30,28 +30,24 @@ fun BanderaScreen(modifier: Modifier = Modifier){
         val (caja, caja1, caja2, caja3) = createRefs();
         val LnGd = createGuidelineFromStart(0.05f)
 
-        Box(modifier.background(Color(0xFFAA151B)).constrainAs(caja) {
+        Box(modifier.background(Color.Yellow).constrainAs(caja) {
             linkTo(parent.start, parent.end)
             linkTo(parent.top, caja1.top)
             width = Dimension.fillToConstraints
-            height = Dimension.fillToConstraints
+            height = Dimension.percent(0.55f)
         })
-        Box(modifier.background(Color(0xFFF1BF00)).constrainAs(caja1) {
+        Box(modifier.background(Color.Blue).constrainAs(caja1) {
             linkTo(parent.start, parent.end )
             linkTo(caja.bottom, caja2.top)
             width = Dimension.fillToConstraints
-            height = Dimension.percent(0.55f)
+            height = Dimension.fillToConstraints
         })
-        Box(modifier.background(Color(0xFFAA151B)).constrainAs(caja2) {
+        Box(modifier.background(Color.Red).constrainAs(caja2) {
             linkTo(parent.start, parent.end)
             linkTo(caja1.bottom, parent.bottom )
             width = Dimension.fillToConstraints
             height = Dimension.fillToConstraints
         })
-        Image(painterResource(R.drawable.escudo_de_espa_a__mazonado_), null ,
-            modifier.size(200.dp).constrainAs(caja3){
-                start.linkTo(LnGd)
-                linkTo(caja.bottom, caja2.top)
-            })
+
     }
 }
