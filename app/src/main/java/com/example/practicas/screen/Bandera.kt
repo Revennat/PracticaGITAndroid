@@ -30,21 +30,21 @@ fun BanderaScreen(modifier: Modifier = Modifier){
         val (caja, caja1, caja2, caja3) = createRefs();
         val LnGd = createGuidelineFromTop(0.4f)
 
-        Box(modifier.background(Color.Green).constrainAs(caja) {
-            linkTo(parent.start, caja1.start)
-            linkTo(parent.top, parent.bottom)
+        Box(modifier.background(Color.Black).constrainAs(caja) {
+            linkTo(parent.start, parent.end)
+            linkTo(parent.top, caja1.top)
             width = Dimension.fillToConstraints
             height = Dimension.fillToConstraints
         })
-        Box(modifier.background(Color.White).constrainAs(caja1) {
-            linkTo(caja.end, caja2.start)
-            linkTo(parent.top, parent.bottom)
+        Box(modifier.background(Color(0xFFDD0000)).constrainAs(caja1) {
+            linkTo(parent.start, parent.end )
+            linkTo(caja.bottom, caja2.top)
             width = Dimension.fillToConstraints
             height = Dimension.fillToConstraints
         })
-        Box(modifier.background(Color.Red).constrainAs(caja2) {
-            linkTo(caja1.end, parent.end)
-            linkTo(parent.top, parent.bottom)
+        Box(modifier.background(Color(0xFFFFCE00)).constrainAs(caja2) {
+            linkTo(parent.start, parent.end)
+            linkTo(caja1.bottom, parent.bottom )
             width = Dimension.fillToConstraints
             height = Dimension.fillToConstraints
         })
