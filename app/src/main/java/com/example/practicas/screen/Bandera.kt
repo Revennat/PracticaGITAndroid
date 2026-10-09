@@ -38,14 +38,24 @@ import com.example.practicas.ui.theme.RojoMexico
 import com.example.practicas.ui.theme.VerdeMexico
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.FilterQuality
+import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.input.pointer.pointerInput
+import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.IntSize
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
@@ -53,53 +63,74 @@ import kotlin.math.sin
 
 @Preview
 @Composable
-fun BanderaCuba(modifier: Modifier = Modifier) {
+fun PixelArtENE(modifier: Modifier = Modifier) {
+// 1. Paleta de colores exacta de la imagen
+    val paleta = mapOf(
+        '.' to Color.Transparent,
+        'B' to Color(0xFF2552A8),
+        'L' to Color(0xFF55E6ED),
+        'G' to Color(0xFF2F3136),
+        'W' to Color(0xFFFFFFFF),
+        'R' to Color(0xFFF48EA3)
+    )
+
+    // 2. Matriz de 32x24 mapeando la figura
+    val sprite = listOf(
+        "................................",
+        "...BBB.BB..BB..BBB.BB..B........",
+        "...B...B.B.B.B.B.B.B.B.B........",
+        "...B...B.B.B.B.B.B.B.B.B........",
+        "...BBB.B.B.B.B.B.B.B.B.B........",
+        "...B...B.B.B.B.B.B.B.B.B........",
+        "...B...BB..BB..B.B.BB..........",
+        "...BBB.B.B.B.B.BBB.B.B.B........",
+        "................................",
+        "................................",
+        "............B...................",
+        ".....BBBB...BB..BBBB.............",
+        "....BBBBBBBBBBBBBBBBB...........",
+        "....BBBBBBBBBBBBBBBBB..........",
+        "...BBBBBBBBBBBWBBBBBBB..........",
+        "...BBBBBWWBBBWWWBBBBBB..........",
+        "..BBB.BWBWWBBWWBWBBB.BB.........",
+        "..BB.BBWWBWBWWBWWBBB.BB.........",
+        "..BB.BBWBWRRRRWBWGB..BB.........",
+        "..BBB.GWLWWRRWLLWG...BB.........",
+        "...B....WLWWWWLW.....B........",
+        "....B...............B...........",
+        "................................",
+        "................................"
+    )
+
     Canvas(modifier = modifier.fillMaxSize()) {
-        val band = size.height / 5f
-        for (i in 0 until 5) {
-            if (i % 2 == 0) drawRect(
-                color = Color(0xFF002E6E),
-                topLeft = Offset(0f, i * band),
-                size = Size(size.width, band)
-            )
-            else drawRect(
-                color = Color.White,
-                topLeft = Offset(0f, i*band),
-                size = Size(size.width, band)
-            )
-        }
-        val triWidth = size.width * 0.38f
-        val trianglePath = Path().apply {
-            moveTo(0f, 0f)
-            lineTo(triWidth, size.height / 2f)
-            lineTo(0f, size.height)
-            close()
-        }
-        drawPath(trianglePath, color = Color(0xFFCB1428))
+        val rows = sprite.size
+        val cols = sprite.maxOf { it.length }
 
-        val cx = triWidth * 0.38f
-        val cy = size.height / 2f
-        val outerRadius = size.height * 0.08f
-        val innerRadius = outerRadius * 0.382f
-        val startAngle = -PI / 2.0 // Punta superior vertical recta
+        val pixelSize = minOf(size.width / cols, size.height / rows)
 
-        val estrellaPath = Path().apply {
-            for (i in 0 until 10) {
-                val r = if (i % 2 == 0) outerRadius else innerRadius
-                val angle = startAngle + i * (PI / 5.0)
+        val offsetX = (size.width - (cols * pixelSize)) / 2f
+        val offsetY = (size.height - (rows * pixelSize)) / 2f
 
-                val x = (cx + r * cos(angle)).toFloat()
-                val y = (cy + r * sin(angle)).toFloat()
+        for (r in 0 until rows) {
+            val rowText = sprite[r].padEnd(cols, '.')
+            for (c in 0 until cols) {
+                val charColor = rowText[c]
+                val color = paleta[charColor] ?: Color.Transparent
 
-                if (i == 0) moveTo(x, y) else lineTo(x, y)
+                if (color != Color.Transparent) {
+                    drawRect(
+                        color = color,
+                        topLeft = Offset(
+                            x = offsetX + (c * pixelSize),
+                            y = offsetY + (r * pixelSize)
+                        ),
+                        size = Size(pixelSize, pixelSize)
+                    )
+                }
             }
-            close()
         }
-
-        drawPath(estrellaPath, color = Color.White)
-
-        // Estrella centrada aprox en (triWidth * 0.38f, size.height / 2f)
     }
 }
+
 
 
