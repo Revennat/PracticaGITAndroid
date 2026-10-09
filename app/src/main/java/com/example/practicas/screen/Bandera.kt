@@ -51,7 +51,7 @@ import kotlin.math.sin
 
 @Preview
 @Composable
-fun BanderaTuquia(modifier: Modifier = Modifier) {
+fun BanderaIsarel(modifier: Modifier = Modifier) {
     Box {
         Column(modifier.fillMaxSize()) {
             Row(
