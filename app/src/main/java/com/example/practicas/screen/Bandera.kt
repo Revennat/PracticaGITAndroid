@@ -43,8 +43,10 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
+import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -52,64 +54,52 @@ import kotlin.math.sin
 @Preview
 @Composable
 fun BanderaIsarel(modifier: Modifier = Modifier) {
-    Box {
-        Column(modifier.fillMaxSize()) {
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .background(Color.Blue)
-            ) { }
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .weight(5f)
-                    .background(Color.White)
-            ) {
-                Canvas(modifier = Modifier.fillMaxSize()) {
-                    val cx = size.width / 2f
-                    val cy = size.height / 2f
-                    val r = size.height * 0.35f
-                    val strokeWidth = size.height * 0.045f
-
-                    // Triángulo 1: Apuntando hacia arriba (-90 grados)
-                    val triangle1 = trianglePath(cx, cy, r, -90f)
-
-                    // Triángulo 2: Apuntando hacia abajo (90 grados)
-                    val triangle2 = trianglePath(cx, cy, r, 90f)
-
-                    // Dibujar ambos triángulos solo con contorno (Stroke)
-                    drawPath(
-                        path = triangle1,
-                        color = Color.Blue,
-                        style = Stroke(width = strokeWidth)
-                    )
-                    drawPath(
-                        path = triangle2,
-                        color = Color.Blue,
-                        style = Stroke(width = strokeWidth)
-                    )
-                }
-            }
-            Row(
-                Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .background(Color.Blue)
-            ) { }
+    Canvas(modifier = modifier.fillMaxSize()) {
+        val band = size.height / 5f
+        for (i in 0 until 5) {
+            if (i % 2 == 0) drawRect(
+                color = Color(0xFF002E6E),
+                topLeft = Offset(0f, i * band),
+                size = Size(size.width, band)
+            )
+            else drawRect(
+                color = Color.White,
+                topLeft = Offset(0f, i*band),
+                size = Size(size.width, band)
+            )
         }
+        val triWidth = size.width * 0.38f
+        val trianglePath = Path().apply {
+            moveTo(0f, 0f)
+            lineTo(triWidth, size.height / 2f)
+            lineTo(0f, size.height)
+            close()
+        }
+        drawPath(trianglePath, color = Color(0xFFCB1428))
+
+        val cx = triWidth * 0.38f
+        val cy = size.height / 2f
+        val outerRadius = size.height * 0.08f
+        val innerRadius = outerRadius * 0.382f
+        val startAngle = -PI / 2.0 // Punta superior vertical recta
+
+        val estrellaPath = Path().apply {
+            for (i in 0 until 10) {
+                val r = if (i % 2 == 0) outerRadius else innerRadius
+                val angle = startAngle + i * (PI / 5.0)
+
+                val x = (cx + r * cos(angle)).toFloat()
+                val y = (cy + r * sin(angle)).toFloat()
+
+                if (i == 0) moveTo(x, y) else lineTo(x, y)
+            }
+            close()
+        }
+
+        drawPath(estrellaPath, color = Color.White)
+
+        // Estrella centrada aprox en (triWidth * 0.38f, size.height / 2f)
     }
 }
 
-fun trianglePath(cx: Float, cy: Float, r: Float, rotationDeg: Float): Path {
-    val path = Path()
-    for (i in 0..2) {
-        val angle = Math.toRadians((rotationDeg + i * 120).toDouble())
-        val x = cx + r * cos(angle).toFloat()
-        val y = cy + r * sin(angle).toFloat()
-        if (i == 0) path.moveTo(x, y) else path.lineTo(x, y)
-    }
-    path.close()
-    return path
-}
 
