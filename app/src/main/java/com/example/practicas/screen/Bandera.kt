@@ -53,7 +53,7 @@ import kotlin.math.sin
 
 @Preview
 @Composable
-fun BanderaIsarel(modifier: Modifier = Modifier) {
+fun BanderaCuba(modifier: Modifier = Modifier) {
     Canvas(modifier = modifier.fillMaxSize()) {
         val band = size.height / 5f
         for (i in 0 until 5) {
