@@ -1,23 +1,30 @@
 package com.example.practicas.screen
 
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.GenericShape
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ChainStyle
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
 import com.example.practicas.R
@@ -26,30 +33,28 @@ import com.example.practicas.ui.theme.RojoFrancia
 import com.example.practicas.ui.theme.RojoMexico
 import com.example.practicas.ui.theme.VerdeMexico
 
-val RombosShape = GenericShape { size, _ ->
-    moveTo(size.width / 2f, 0f)
-    lineTo(size.width, size.height / 2f)
-    lineTo(size.width / 2f, size.height)
-    lineTo(0f, size.height / 2f)
-    close()
-}
-
 @Preview
 @Composable
-fun BanderaScreen(modifier: Modifier = Modifier){
-    ConstraintLayout(modifier = modifier.fillMaxSize()) {
-        val (caja, caja1, caja2, caja3) = createRefs();
-        val LnGd = createGuidelineFromStart(0.5f)
-
-        Box(modifier.background(Color.White).constrainAs(caja) {
-            linkTo(parent.start, parent.end)
-            linkTo(parent.top, parent.bottom)
-            width = Dimension.fillToConstraints
-            height = Dimension.fillToConstraints
-        })
-        Box(modifier.clip(CircleShape).background(Color.Red).size(180.dp).constrainAs(caja2) {
-            linkTo(parent.start, parent.end)
-            linkTo(parent.top, parent.bottom)
-        })
+fun BanderaSuiza(modifier: Modifier = Modifier) {
+    Box(
+        modifier = modifier
+            .aspectRatio(1f)
+            .background(Color(0xFFD52B1E))
+    ) {
+        Box(
+            Modifier
+                .align(Alignment.Center)
+                .fillMaxWidth(0.2f)
+                .fillMaxHeight(0.62f)
+                .background(Color.White)
+        )
+        Box(
+            Modifier
+                .align(Alignment.Center)
+                .fillMaxHeight(0.2f)
+                .fillMaxWidth(0.62f)
+                .background(Color.White)
+        )
     }
 }
+
