@@ -54,6 +54,7 @@ import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.IntSize
 import kotlin.math.PI
@@ -63,71 +64,74 @@ import kotlin.math.sin
 
 @Preview
 @Composable
-fun PixelArtENE(modifier: Modifier = Modifier) {
-// 1. Paleta de colores exacta de la imagen
-    val paleta = mapOf(
-        '.' to Color.Transparent,
-        'B' to Color(0xFF2552A8),
-        'L' to Color(0xFF55E6ED),
-        'G' to Color(0xFF2F3136),
-        'W' to Color(0xFFFFFFFF),
-        'R' to Color(0xFFF48EA3)
-    )
+fun PixelArtDirecto() {
+    val pixelSize: Dp = 12.dp
 
-    // 2. Matriz de 32x24 mapeando la figura
-    val sprite = listOf(
-        "................................",
-        "...BBB.BB..BB..BBB.BB..B........",
-        "...B...B.B.B.B.B.B.B.B.B........",
-        "...B...B.B.B.B.B.B.B.B.B........",
-        "...BBB.B.B.B.B.B.B.B.B.B........",
-        "...B...B.B.B.B.B.B.B.B.B........",
-        "...B...BB..BB..B.B.BB..........",
-        "...BBB.B.B.B.B.BBB.B.B.B........",
-        "................................",
-        "................................",
-        "............B...................",
-        ".....BBBB...BB..BBBB.............",
-        "....BBBBBBBBBBBBBBBBB...........",
-        "....BBBBBBBBBBBBBBBBB..........",
-        "...BBBBBBBBBBBWBBBBBBB..........",
-        "...BBBBBWWBBBWWWBBBBBB..........",
-        "..BBB.BWBWWBBWWBWBBB.BB.........",
-        "..BB.BBWWBWBWWBWWBBB.BB.........",
-        "..BB.BBWBWRRRRWBWGB..BB.........",
-        "..BBB.GWLWWRRWLLWG...BB.........",
-        "...B....WLWWWWLW.....B........",
-        "....B...............B...........",
-        "................................",
-        "................................"
-    )
+    // Colores
+    val azul = Color(0xFF2552A8)
+    val blanco = Color.White
+    val negro = Color(0xFF2F3136)
+    val rosa = Color(0xFFF48EA3)
+    val cian = Color(0xFF55E6ED)
+    val crema = Color(0xFFFFF2C6)
 
-    Canvas(modifier = modifier.fillMaxSize()) {
-        val rows = sprite.size
-        val cols = sprite.maxOf { it.length }
+    @Composable
+    fun Pixel(color: Color) {
+        Box(
+            modifier = Modifier
+                .size(pixelSize)
+                .background(color)
+        )
+    }
 
-        val pixelSize = minOf(size.width / cols, size.height / rows)
-
-        val offsetX = (size.width - (cols * pixelSize)) / 2f
-        val offsetY = (size.height - (rows * pixelSize)) / 2f
-
-        for (r in 0 until rows) {
-            val rowText = sprite[r].padEnd(cols, '.')
-            for (c in 0 until cols) {
-                val charColor = rowText[c]
-                val color = paleta[charColor] ?: Color.Transparent
-
-                if (color != Color.Transparent) {
-                    drawRect(
-                        color = color,
-                        topLeft = Offset(
-                            x = offsetX + (c * pixelSize),
-                            y = offsetY + (r * pixelSize)
-                        ),
-                        size = Size(pixelSize, pixelSize)
-                    )
-                }
-            }
+    Column {
+        Row {
+            Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);
+        }
+        Row {
+            Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);
+        }
+        Row {
+            Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(azul); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);
+        }
+        Row {
+            Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(azul); Pixel(azul);Pixel(azul); Pixel(Color.White); Pixel(Color.White); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(Color.White);Pixel(Color.White); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);
+        }
+        Row {
+            Pixel(Color.White); Pixel(Color.White); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul);Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul);Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(Color.White); Pixel(Color.White);
+        }
+        Row {
+            Pixel(Color.White); Pixel(Color.White); Pixel(azul); Pixel(azul); Pixel(azul);Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul);Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(Color.White); Pixel(Color.White);
+        }
+        Row {
+            Pixel(Color.White); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul);Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul);Pixel(Color.White); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(Color.White);
+        }
+        Row {
+            Pixel(Color.White); Pixel(azul); Pixel(azul); Pixel(Color.White); Pixel(azul);Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(azul); Pixel(Color.White);
+        }
+        Row {
+            Pixel(azul); Pixel(azul); Pixel(Color.White); Pixel(azul); Pixel(azul);Pixel(Color.White); Pixel(azul); Pixel(Color.White); Pixel(Color.White); Pixel(azul); Pixel(azul); Pixel(Color.White);Pixel(Color.White); Pixel(azul); Pixel(Color.White); Pixel(azul); Pixel(azul); Pixel(Color.White); Pixel(azul); Pixel(azul);
+        }
+        Row {
+            Pixel(azul); Pixel(azul); Pixel(Color.White); Pixel(azul); Pixel(azul);Pixel(Color.White); Pixel(Color.White); Pixel(azul); Pixel(Color.White); Pixel(azul); Pixel(Color.White); Pixel(Color.White);Pixel(azul); Pixel(Color.White); Pixel(Color.White); Pixel(negro); Pixel(azul); Pixel(Color.White); Pixel(azul); Pixel(azul);
+        }
+        Row {
+            Pixel(azul); Pixel(azul); Pixel(azul); Pixel(Color.White); Pixel(negro);Pixel(Color.White); Pixel(azul); Pixel(Color.White); Pixel(rosa); Pixel(rosa); Pixel(rosa); Pixel(rosa);Pixel(Color.White); Pixel(azul); Pixel(Color.White); Pixel(negro); Pixel(Color.White); Pixel(Color.White); Pixel(azul); Pixel(azul);
+        }
+        Row {
+            Pixel(Color.White); Pixel(azul); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(cian); Pixel(cian); Pixel(Color.White); Pixel(rosa); Pixel(rosa); Pixel(Color.White);Pixel(cian); Pixel(cian); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(azul); Pixel(Color.White);
+        }
+        Row {
+            Pixel(Color.White); Pixel(Color.White); Pixel(azul); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(cian);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(cian); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(azul); Pixel(Color.White); Pixel(Color.White);
+        }
+        Row {
+            Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);
+        }
+        Row {
+            Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);
+        }
+        Row {
+            Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White); Pixel(Color.White);
         }
     }
 }
