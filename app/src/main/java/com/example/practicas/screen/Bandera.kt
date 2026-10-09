@@ -57,7 +57,8 @@ fun BanderaCuba(modifier: Modifier = Modifier) {
     Canvas(modifier = modifier.fillMaxSize()) {
         val band = size.height / 5f
         for (i in 0 until 5) {
-            if (i % 2 == 0) drawRect(
+            if 
+                    (i % 2 == 0) drawRect(
                 color = Color(0xFF002E6E),
                 topLeft = Offset(0f, i * band),
                 size = Size(size.width, band)
